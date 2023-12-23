@@ -9,7 +9,7 @@ describe('product repository Unit test', () => {
   beforeEach(async () => {
     sequileze = new Sequelize({
       dialect: 'sqlite',
-      storage: ':memory',
+      storage: ':memory:',
       logging: false,
       sync: { force: true }
     })

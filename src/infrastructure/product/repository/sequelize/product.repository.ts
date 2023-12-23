@@ -1,9 +1,10 @@
 import Product from '../../../../domain/product/entity/product'
+import { type ProductInterface } from '../../../../domain/product/entity/product.interface'
 import { type ProductRepositoryInterface } from '../../../../domain/product/repository/product-repository.interface'
 import { ProductModel } from './prudct.model'
 
 export class ProductRepository implements ProductRepositoryInterface {
-  async update (entity: Product): Promise<void> {
+  async update (entity: ProductInterface): Promise<void> {
     await ProductModel.update({
       name: entity.name,
       price: entity.price
@@ -23,7 +24,7 @@ export class ProductRepository implements ProductRepositoryInterface {
     return products.map(product => new Product(product.id, product.name, product.price))
   }
 
-  async create (entity: Product): Promise<void> {
+  async create (entity: ProductInterface): Promise<void> {
     await ProductModel.create({
       name: entity.name,
       price: entity.price
