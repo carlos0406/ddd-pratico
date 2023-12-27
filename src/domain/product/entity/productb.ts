@@ -1,11 +1,11 @@
 import { type ProductInterface } from './product.interface'
 
 export default class ProductB implements ProductInterface {
-  _id: number = 0
+  _id: string = ''
   _name: string = ''
   _price: number = 0
 
-  constructor (_id: number, _name: string, _price: number) {
+  constructor (_id: string, _name: string, _price: number) {
     this._id = _id
     this._name = _name
     this._price = _price
@@ -20,7 +20,7 @@ export default class ProductB implements ProductInterface {
     return this._price * 2
   }
 
-  get id (): number {
+  get id (): string {
     return this._id
   }
 
@@ -35,7 +35,7 @@ export default class ProductB implements ProductInterface {
   }
 
   validate (): boolean {
-    if (this._id <= 0) {
+    if (this._id.length === 0) {
       throw new Error('Id é obrigatório')
     }
     if (this._name.length === 0) {

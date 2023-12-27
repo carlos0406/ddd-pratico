@@ -23,16 +23,16 @@ describe('test find customer use case ', () => {
   })
 
   it('should find a customer', async () => {
-    const customer = new Customer(1, 'Customer 1')
+    const customer = new Customer('abc', 'Customer 1')
     customer.address = new Address('Joao', 1, '123', 'parazinho')
     const custumerRepository = new CustomerRepository()
     const usecase = new FindCustomerUseCase(custumerRepository)
     await custumerRepository.create(customer)
     const input = {
-      id: 1
+      id: 'abc'
     }
     const expectedOutput = {
-      id: 1,
+      id: 'abc',
       name: 'Customer 1',
       address: {
         street: 'Joao',

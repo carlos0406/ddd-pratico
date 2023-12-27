@@ -1,8 +1,8 @@
 import Product from '../../../domain/product/entity/product'
 import ListProductUseCase from './list.product.usecase'
 
-const product1 = new Product(1, 'p 1', 10)
-const product2 = new Product(2, 'p 2', 20)
+const product1 = new Product('abc', 'p 1', 10)
+const product2 = new Product('abc2', 'p 2', 20)
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const MockRepository = () => {
   return {

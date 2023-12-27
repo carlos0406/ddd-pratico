@@ -8,13 +8,13 @@
 import { type Address } from '../value-object/address'
 
 export class Customer {
-  private readonly _id: number
+  private readonly _id : string
   private _name: string
   private _address!: Address
   private _enable: boolean = false
   private _rewardPoints: number = 0
 
-  constructor (id: number, name: string) {
+  constructor (id : string, name: string) {
     this._id = id
     this._name = name
     this.validate()
@@ -34,7 +34,7 @@ export class Customer {
     this._name = name
   }
 
-  get id (): number {
+  get id (): string  {
     return this._id
   }
 
@@ -49,7 +49,7 @@ export class Customer {
   validate (): void {
     if (this.name === undefined || this.name.length === 0) {
       throw new Error('Nome é obrigatorio')
-    } else if (this._id === 0) {
+    } else if (this._id === "") {
       throw new Error('Id é obrigatório')
     }
   }

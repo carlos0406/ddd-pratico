@@ -3,13 +3,13 @@ import OrderFactory from './order.factory'
 describe('Order factory unit test', () => {
   it('should create an order', () => {
     const orderProps = {
-      id: 1,
-      customerId: 1,
+      id: 'abc',
+      customerId: 'abcd',
       items: [
         {
-          id: 1,
+          id: 'abc',
           name: 'Product 1',
-          productId: 1,
+          productId: 'abc',
           quantity: 1,
           price: 100
         }

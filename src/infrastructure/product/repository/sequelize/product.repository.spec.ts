@@ -23,10 +23,10 @@ describe('product repository Unit test', () => {
 
   it('should create a product model', async () => {
     const productRepository = new ProductRepository()
-    await productRepository.create(new Product(1, 'Produto 1', 100))
-    const product = await ProductModel.findOne({ where: { id: 1 } })
+    await productRepository.create(new Product('abc', 'Produto 1', 100))
+    const product = await ProductModel.findOne({ where: { id: 'abc' } })
     expect(product?.toJSON()).toStrictEqual({
-      id: 1,
+      id: 'abc',
       name: 'Produto 1',
       price: 100
     })
@@ -34,16 +34,16 @@ describe('product repository Unit test', () => {
 
   it('should update a product', async () => {
     const productRepository = new ProductRepository()
-    const product = new Product(1, 'Produto 1', 100)
+    const product = new Product('abc', 'Produto 1', 100)
     await productRepository.create(product)
     // const productDb = await ProductModel.findOne({ where: { id: 1 } })
 
     product.changeName('produto 2')
     product.changePrice(200)
     await productRepository.update(product)
-    const productDb = await ProductModel.findOne({ where: { id: 1 } })
+    const productDb = await ProductModel.findOne({ where: { id: 'abc' } })
     expect(productDb?.toJSON()).toStrictEqual({
-      id: 1,
+      id: 'abc',
       name: 'produto 2',
       price: 200
     })
@@ -51,9 +51,9 @@ describe('product repository Unit test', () => {
 
   it('should find a product', async () => {
     const productRepository = new ProductRepository()
-    await productRepository.create(new Product(1, 'Produto 1', 100))
-    const productModel = await ProductModel.findOne({ where: { id: 1 } })
-    const productDB = await productRepository.find(productModel?.id)
+    await productRepository.create(new Product('abc', 'Produto 1', 100))
+    const productModel = await ProductModel.findOne({ where: { id: 'abc' } })
+    const productDB = await productRepository.find(productModel.id)
     expect(productModel?.toJSON()).toStrictEqual({
       id: productDB.id,
       name: productDB.name,
@@ -62,8 +62,8 @@ describe('product repository Unit test', () => {
   })
 
   it('should find all product', async () => {
-    const p1 = new Product(1, 'Produto 1', 100)
-    const p2 = new Product(2, 'Produto 2', 200)
+    const p1 = new Product('abc', 'Produto 1', 100)
+    const p2 = new Product('abcd', 'Produto 2', 200)
     const p = [p1, p2]
     const productRepository = new ProductRepository()
     await productRepository.create(p1)

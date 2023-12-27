@@ -1,5 +1,5 @@
 export interface InputUpdateCustomerDto {
-  id: number
+  id : string
   name: string
   address: {
     street: string
@@ -10,7 +10,7 @@ export interface InputUpdateCustomerDto {
 }
 
 export interface OutputUpdateCustomerDto {
-  id: number
+  id : string
   name: string
   address: {
     street: string

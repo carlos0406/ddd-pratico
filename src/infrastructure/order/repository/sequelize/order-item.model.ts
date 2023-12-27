@@ -16,18 +16,18 @@ import { ProductModel } from '../../../product/repository/sequelize/prudct.model
 export default class OrderItemModel extends Model {
   @PrimaryKey
   @Column
-  declare id: number
+  declare id: string
 
   @ForeignKey(() => ProductModel)
   @Column({ allowNull: false })
-  declare product_id: number
+  declare product_id: string
 
   @BelongsTo(() => ProductModel)
   declare product: ProductModel
 
   @ForeignKey(() => OrderModel)
   @Column({ allowNull: false })
-  declare order_id: number
+  declare order_id: string
 
   @BelongsTo(() => OrderModel)
   declare order: OrderModel

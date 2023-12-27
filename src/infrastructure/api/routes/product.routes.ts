@@ -17,6 +17,7 @@ productRoute.post('/', async (req: Request, res: Response) => {
     const output = await usecase.execute(productDTO)
     res.json(output).status(200)
   } catch (error) {
+    console.log(error)
     res.sendStatus(500)
   }
 })
@@ -28,7 +29,8 @@ productRoute.get('/', async (req: Request, res: Response) => {
     const list = await usecase.execute({})
     console.log(list)
     res.json(list).status(200)
-  } catch {
+  } catch (error) {
+    console.log(error)
     res.sendStatus(500)
   }
 })

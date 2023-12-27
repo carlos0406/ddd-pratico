@@ -15,7 +15,7 @@ async function setupDb (): Promise<void> {
   sequelize = new Sequelize(
     {
       dialect: 'sqlite',
-      storage: ':memory121:'
+      storage: ':memory:'
     })
   sequelize.addModels([CustomerModel, ProductModel])
   await sequelize.sync()

@@ -17,11 +17,11 @@ import { CustomerModel } from '../../../customer/repository/sequelize/custumer.m
 export default class OrderModel extends Model {
   @PrimaryKey
   @Column
-  declare id: number
+  declare id: string
 
   @ForeignKey(() => CustomerModel)
   @Column({ allowNull: false })
-  declare customer_id: number
+  declare customer_id: string
 
   @BelongsTo(() => CustomerModel)
   declare customer: CustomerModel

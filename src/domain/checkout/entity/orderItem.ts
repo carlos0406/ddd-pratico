@@ -1,11 +1,11 @@
 export class OrderItem {
-  private readonly _id: number = 0
+  private readonly _id: string = ''
   private readonly _name: string
   private _price: number = 0
   private readonly _quantity: number = 0
-  private readonly _product_id: number = 0
+  private readonly _product_id: string = ''
 
-  constructor (_id: number, _name: string, price: number, quantity: number, productId: number) {
+  constructor (_id: string, _name: string, price: number, quantity: number, productId: string) {
     this._id = _id
     this._name = _name
     this._price = price
@@ -26,7 +26,7 @@ export class OrderItem {
     return this._quantity
   }
 
-  get productId (): number {
+  get productId (): string {
     return this._product_id
   }
 
@@ -34,7 +34,7 @@ export class OrderItem {
     return this._name
   }
 
-  get id (): number {
+  get id (): string {
     return this._id
   }
 

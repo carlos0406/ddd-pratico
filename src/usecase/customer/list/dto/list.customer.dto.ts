@@ -2,7 +2,7 @@
 export interface InputListCustomerDto {}
 
 interface Customer {
-  id: number
+  id : string
   name: string
   address: {
     street: string

@@ -4,7 +4,7 @@ export interface InputCreateProductDto {
 }
 
 export interface OutputCreateProductDto {
-  id: number
+  id : string
   name: string
   price: number
 }

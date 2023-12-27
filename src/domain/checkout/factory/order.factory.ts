@@ -3,12 +3,12 @@ import { Order } from '../entity/order'
 import { OrderItem } from '../entity/orderItem'
 
 interface OrderFactoryProps {
-  id: number
-  customerId: number
+  id: string
+  customerId: string
   items: Array<{
-    id: number
+    id: string
     name: string
-    productId: number
+    productId: string
     quantity: number
     price: number
   }>
@@ -21,8 +21,8 @@ export default class OrderFactory {
         item.id,
         item.name,
         item.price,
-        item.productId,
-        item.quantity
+        item.quantity,
+        item.productId
       )
     })
 

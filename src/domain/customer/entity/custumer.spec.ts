@@ -9,32 +9,32 @@ describe('Customer unit test', () => {
   it('shoud throw error whe id is empty', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const customer = new Customer(0, 'robson')
+      const customer = new Customer('', 'robson')
     }).toThrow('Id é obrigatório')
   })
 
   it('shoud throw error whe name is empty', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const customer = new Customer(10, '')
+      const customer = new Customer('abc5', '')
     }).toThrow('Nome é obrigatorio')
   })
 
   it('shoud throw error whe name is empty on change name', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const customer = new Customer(10, '')
+      const customer = new Customer('abc5', '')
     }).toThrow('Nome é obrigatorio')
   })
 
   it('shoud change name', () => {
-    const customer = new Customer(10, 'robson')
+    const customer = new Customer('abc5', 'robson')
     customer.changeName('robson2')
     expect(customer.name).toBe('robson2')
   })
 
   it('shoud activate customer', () => {
-    const customer = new Customer(10, 'robson')
+    const customer = new Customer('abc5', 'robson')
     const address = new Address('joão rabelo', 10, '59586000', 'parazinho')
     customer.address = address
     customer.active()
@@ -42,7 +42,7 @@ describe('Customer unit test', () => {
   })
 
   it('shoud  throw error when activate customer', () => {
-    const customer = new Customer(10, 'robson')
+    const customer = new Customer('abc', 'robson')
 
     expect(() => {
       customer.active()
@@ -50,7 +50,7 @@ describe('Customer unit test', () => {
   })
 
   it('shoud desactivate customer', () => {
-    const customer = new Customer(10, 'robson')
+    const customer = new Customer('abc', 'robson')
     const address = new Address('joão rabelo', 10, '59586000', 'parazinho')
     customer.address = address
     customer.active()
@@ -60,7 +60,7 @@ describe('Customer unit test', () => {
   })
 
   it('shoud add customer reward Points', () => {
-    const customer = new Customer(10, 'robson')
+    const customer = new Customer('abc', 'robson')
     expect(customer.rewardPoints).toBe(0)
     customer.addRewardPoints(10)
 

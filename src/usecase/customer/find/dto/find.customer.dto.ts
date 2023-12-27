@@ -1,9 +1,9 @@
 export interface InputFindCustomerDto {
-  id: number
+  id : string
 }
 
 export interface OutputFindCustomerDto {
-  id: number
+  id : string
   name: string
   address: {
     street: string

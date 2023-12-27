@@ -1,4 +1,4 @@
-import { AutoIncrement, Column, PrimaryKey, Table, Model } from 'sequelize-typescript'
+import { Column, PrimaryKey, Table, Model } from 'sequelize-typescript'
 
 @Table({
   tableName: 'products',
@@ -6,9 +6,8 @@ import { AutoIncrement, Column, PrimaryKey, Table, Model } from 'sequelize-types
 })
 export class ProductModel extends Model {
   @PrimaryKey
-  @AutoIncrement
   @Column
-  declare id: number
+  declare id: string
 
   @Column({ allowNull: false })
   declare name: string

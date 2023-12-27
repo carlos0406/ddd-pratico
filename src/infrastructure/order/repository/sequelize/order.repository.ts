@@ -5,7 +5,7 @@ import OrderItemModel from './order-item.model'
 import OrderModel from './order.model'
 
 export default class OrderRepository implements OrderRepositoryInterface {
-  async delete (id: number): Promise<void> {
+  async delete (id: string): Promise<void> {
     await OrderModel.destroy({ where: { id } })
   }
 
@@ -41,7 +41,7 @@ export default class OrderRepository implements OrderRepositoryInterface {
     }
   }
 
-  async find (id: number): Promise<Order> {
+  async find (id: string): Promise<Order> {
     const orderDb = await OrderModel.findByPk(id, {
       include: [{ model: OrderItemModel }]
     })

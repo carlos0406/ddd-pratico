@@ -23,13 +23,13 @@ describe('Customer repository Unit test', () => {
   })
 
   it('should create a customer model', async () => {
-    const customer = new Customer(1, 'Customer 1')
+    const customer = new Customer('abc', 'Customer 1')
     customer.address = new Address('Joao', 1, '123', 'parazinho')
     const customerRepository = new CustomerRepository()
     await customerRepository.create(customer)
-    const customerDb = await CustomerModel.findOne({ where: { id: 1 } })
+    const customerDb = await CustomerModel.findOne({ where: { id: 'abc' } })
     expect(customerDb.toJSON()).toStrictEqual({
-      id: 1,
+      id: 'abc',
       name: 'Customer 1',
       street: 'Joao',
       number: 1,
@@ -41,7 +41,7 @@ describe('Customer repository Unit test', () => {
   })
 
   it('should update a customer', async () => {
-    const customer = new Customer(1, 'Customer 1')
+    const customer = new Customer('abc', 'Customer 1')
     customer.address = new Address('Joao', 1, '123', 'parazinho')
     const customerRepository = new CustomerRepository()
     await customerRepository.create(customer)
@@ -49,10 +49,10 @@ describe('Customer repository Unit test', () => {
     customer.changeName('Customer 2')
     customer.active()
     await customerRepository.update(customer)
-    const customerDb = await CustomerModel.findOne({ where: { id: 1 } })
+    const customerDb = await CustomerModel.findOne({ where: { id: 'abc' } })
 
     expect(customerDb.toJSON()).toStrictEqual({
-      id: 1,
+      id: 'abc',
       name: 'Customer 2',
       street: 'Joao',
       number: 1,
@@ -64,11 +64,11 @@ describe('Customer repository Unit test', () => {
   })
 
   it('should find a product', async () => {
-    const customer = new Customer(1, 'Customer 1')
+    const customer = new Customer('abc', 'Customer 1')
     customer.address = new Address('Joao', 1, '123', 'parazinho')
     const customerRepository = new CustomerRepository()
     await customerRepository.create(customer)
-    const customerModel = await CustomerModel.findOne({ where: { id: 1 } })
+    const customerModel = await CustomerModel.findOne({ where: { id: 'abc' } })
     const customerDB = await customerRepository.find(customerModel.id)
 
     expect(customerModel.toJSON()).toStrictEqual({
@@ -84,8 +84,8 @@ describe('Customer repository Unit test', () => {
   })
 
   it('should find all product', async () => {
-    const c1 = new Customer(1, 'Customer 1')
-    const c2 = new Customer(2, 'Customer 2')
+    const c1 = new Customer('abc', 'Customer 1')
+    const c2 = new Customer('abcd', 'Customer 2')
     c1.address = new Address('Joao', 1, '123', 'parazinho')
     c2.address = new Address('Rabelo', 1, '123', 'parazinho')
     const customerRepository = new CustomerRepository()
@@ -100,6 +100,6 @@ describe('Customer repository Unit test', () => {
 
   it('shoud throw error when customer not found', async () => {
     const customerRepository = new CustomerRepository()
-    void expect(async () => { await customerRepository.find(1) }).rejects.toThrow('Customer not found')
+    void expect(async () => { await customerRepository.find('aaaaa') }).rejects.toThrow('Customer not found')
   })
 })

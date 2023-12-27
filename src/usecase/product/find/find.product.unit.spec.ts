@@ -1,7 +1,7 @@
 import Product from '../../../domain/product/entity/product'
 import { FindProductUseCase } from './find.product.usecase'
 
-const product = new Product(1, 'p 1', 10)
+const product = new Product('abc', 'p 1', 10)
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const MockRepository = () => {
   return {
@@ -19,11 +19,11 @@ describe('test find customer use case ', () => {
     const usecase = new FindProductUseCase(custumerRepository)
 
     const expectedOutput = {
-      id: 1,
+      id: 'abc',
       name: 'p 1',
       price: 10
     }
-    const output = await usecase.execute({ id: 1 })
+    const output = await usecase.execute({ id: 'abc' })
     expect(output).toEqual(expectedOutput)
   })
 
@@ -35,7 +35,7 @@ describe('test find customer use case ', () => {
     const usecase = new FindProductUseCase(custumerRepository)
 
     await expect(async () => {
-      return await usecase.execute({ id: 1 })
+      return await usecase.execute({ id: 'abc' })
     }).rejects.toThrow('Product not found')
   })
 })

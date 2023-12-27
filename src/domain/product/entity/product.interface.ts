@@ -1,5 +1,5 @@
 export interface ProductInterface {
-  get id(): number
+  get id(): string
   get name(): string
   get price(): number
   changeName: (name: string) => void

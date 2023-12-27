@@ -1,11 +1,11 @@
 export interface InputUpdateProductDto {
-  id: number
+  id : string
   name: string
   price: number
 }
 
 export interface OutputUpdateProductDto {
-  id: number
+  id : string
   name: string
   price: number
 }

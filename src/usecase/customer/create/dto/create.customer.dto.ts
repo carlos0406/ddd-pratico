@@ -9,7 +9,7 @@ export interface InputCreateCustomerDto {
 }
 
 export interface OutputCreateCustomerDto {
-  id: number
+  id : string
   name: string
   address: {
     street: string

@@ -18,7 +18,7 @@ export class CustomerRepository implements CustomerRepositoryInterface {
     })
   }
 
-  async find (id: number): Promise<Customer> {
+  async find (id: string): Promise<Customer> {
     let customer: Customer
     try {
       const customerDB = await CustomerModel.findOne({ where: { id }, rejectOnEmpty: true })
@@ -31,7 +31,7 @@ export class CustomerRepository implements CustomerRepositoryInterface {
     return customer
   }
 
-  delete: (id: number) => Promise<void>
+  delete: (id: string) => Promise<void>
   async findAll (): Promise<Customer[]> {
     const customers = await CustomerModel.findAll()
     return customers.map(c => {

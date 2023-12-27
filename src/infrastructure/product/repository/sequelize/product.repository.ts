@@ -13,12 +13,12 @@ export class ProductRepository implements ProductRepositoryInterface {
     })
   }
 
-  async find (id: number): Promise<Product> {
+  async find (id: string): Promise<Product> {
     const productModel = await ProductModel.findOne({ where: { id } })
     return new Product(productModel.id, productModel.name, productModel.price)
   }
 
-  delete: (id: number) => Promise<void>
+  delete: (id: string) => Promise<void>
   async findAll (): Promise<Product[]> {
     const products = await ProductModel.findAll()
     return products.map(product => new Product(product.id, product.name, product.price))
@@ -26,6 +26,7 @@ export class ProductRepository implements ProductRepositoryInterface {
 
   async create (entity: ProductInterface): Promise<void> {
     await ProductModel.create({
+      id: entity.id,
       name: entity.name,
       price: entity.price
     })

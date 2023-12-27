@@ -2,14 +2,14 @@ import { Customer } from '../../../domain/customer/entity/customer'
 import { Address } from '../../../domain/customer/value-object/address'
 import { CreateCustomerUseCase } from './create.customer.usecase'
 
-const customer = new Customer(1, 'Customer 1')
+const customer = new Customer('abc', 'Customer 1')
 customer.address = new Address('Joao', 1, '123', 'parazinho')
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const MockRepository = () => {
   return {
     create: jest.fn(),
     update: jest.fn(),
-    find: jest.fn<Promise<Customer>, [number]>().mockReturnValue(Promise.resolve(customer)),
+    find: jest.fn<Promise<Customer>, [string]>().mockReturnValue(Promise.resolve(customer)),
     delete: jest.fn(),
     findAll: jest.fn()
   }
@@ -31,9 +31,10 @@ describe('test create customer use case ', () => {
     }
 
     const output = await usecase.execute(input)
+
     expect(output).toEqual({
-      id: 1,
       name: 'Customer 1',
+      id: expect.any(String),
       address: {
         street: 'Joao',
         city: 'parazinho',

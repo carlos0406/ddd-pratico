@@ -1,7 +1,7 @@
 import Product from '../../../domain/product/entity/product'
 import { CreateProductUseCase } from './create.product.usecase'
 
-const product = new Product(1, 'p 1', 10)
+const product = new Product('abc', 'p 1', 10)
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const MockRepository = () => {
   return {
@@ -24,10 +24,11 @@ describe('test create product use case ', () => {
     }
 
     const output = await usecase.execute(input)
+
     expect(output).toEqual({
-      id: 1,
       name: 'p 1',
-      price: 10
+      price: 10,
+      id: expect.any(String)
     })
   })
 

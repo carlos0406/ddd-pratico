@@ -11,7 +11,7 @@ export class OrderService {
     if (orderItems.length === 0) {
       throw new Error('ordem deve conter pelo menos um item')
     }
-    const order = new Order(1, customer.id, orderItems)
+    const order = new Order('abc5', customer.id, orderItems)
     customer.addRewardPoints(order.total() / 2)
     return order
   }
