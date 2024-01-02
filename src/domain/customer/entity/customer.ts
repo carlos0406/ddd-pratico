@@ -5,17 +5,18 @@
 // entidade precisa se auto validar para manter a consisência dos dados
 // diferenciar entidade focada em negocio de entidade focada em persistencia "Model"
 
+import { AbstractClassEntity } from '../../@shared/entity/entity.abstract'
 import { type Address } from '../value-object/address'
 
-export class Customer {
-  private readonly _id : string
+export class Customer extends AbstractClassEntity {
   private _name: string
   private _address!: Address
   private _enable: boolean = false
   private _rewardPoints: number = 0
 
-  constructor (id : string, name: string) {
-    this._id = id
+  constructor (id: string, name: string) {
+    super()
+    this.id = id
     this._name = name
     this.validate()
   }
@@ -34,10 +35,6 @@ export class Customer {
     this._name = name
   }
 
-  get id (): string  {
-    return this._id
-  }
-
   get rewardPoints (): number {
     return this._rewardPoints
   }
@@ -48,9 +45,17 @@ export class Customer {
 
   validate (): void {
     if (this.name === undefined || this.name.length === 0) {
-      throw new Error('Nome é obrigatorio')
-    } else if (this._id === "") {
-      throw new Error('Id é obrigatório')
+      this.notification.addError({
+        context: 'custumer',
+        message: 'Nome é obrigatorio'
+      })
+      // throw new Error('Nome é obrigatorio')
+    } else if (this.id === '') {
+      this.notification.addError({
+        context: 'custumer',
+        message: 'Id é obrigatório'
+      })
+      // throw new Error('Id é obrigatório')
     }
   }
 
