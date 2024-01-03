@@ -66,4 +66,37 @@ describe('E2E TESTS FOR CUSTOMER', () => {
     expect(response.body.customers[0].address.city).toBe('São Paulo')
     expect(response.body.customers[0].address.zip).toBe('12345')
   })
+
+  it('should list all customers with xml', async () => {
+    await request(app)
+      .post('/customer')
+      .send({
+        name: 'Robson',
+        address: {
+          street: 'Rua',
+          number: 1,
+          city: 'São Paulo',
+          zip: '12345'
+        }
+      })
+    const response = await request(app)
+      .get('/customer').set('Accept', 'application/xml').send()
+    expect(response.status).toBe(200)
+    expect(response.text).toContain('<?xml version="1.0" encoding="UTF-8"?>')
+    expect(response.text).toContain('<customers>')
+    expect(response.text).toContain('<customer>')
+    expect(response.text).toContain('<name>Robson</name>')
+    expect(response.text).toContain('<address>')
+    expect(response.text).toContain('<street>Rua</street>')
+    expect(response.text).toContain('<number>1</number>')
+    expect(response.text).toContain('<city>São Paulo</city>')
+    expect(response.text).toContain('<zip>12345</zip>')
+
+    // expect(response.body.customers.length).toBe(1)
+    // expect(response.body.customers[0].name).toBe('Robson')
+    // expect(response.body.customers[0].address.street).toBe('Rua')
+    // expect(response.body.customers[0].address.number).toBe(1)
+    // expect(response.body.customers[0].address.city).toBe('São Paulo')
+    // expect(response.body.customers[0].address.zip).toBe('12345')
+  })
 })
