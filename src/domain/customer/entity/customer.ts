@@ -6,6 +6,7 @@
 // diferenciar entidade focada em negocio de entidade focada em persistencia "Model"
 
 import { AbstractClassEntity } from '../../@shared/entity/entity.abstract'
+import NotificationError from '../../@shared/notification/notification.error'
 import { type Address } from '../value-object/address'
 
 export class Customer extends AbstractClassEntity {
@@ -16,9 +17,12 @@ export class Customer extends AbstractClassEntity {
 
   constructor (id: string, name: string) {
     super()
-    this.id = id
+    this._id = id
     this._name = name
     this.validate()
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErros())
+    }
   }
 
   get name (): string {
@@ -49,13 +53,12 @@ export class Customer extends AbstractClassEntity {
         context: 'custumer',
         message: 'Nome é obrigatorio'
       })
-      // throw new Error('Nome é obrigatorio')
-    } else if (this.id === '') {
+    }
+    if (this._id === undefined || this._id.length === 0) {
       this.notification.addError({
         context: 'custumer',
         message: 'Id é obrigatório'
       })
-      // throw new Error('Id é obrigatório')
     }
   }
 
@@ -74,14 +77,6 @@ export class Customer extends AbstractClassEntity {
   isActive (): boolean {
     return this._enable
   }
-
-  // get id (): string {
-  //   return this._id
-  // }
-
-  // set id (id: string) {
-  //   this._id = id
-  // }
 
   get address (): Address {
     return this._address

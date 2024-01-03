@@ -42,7 +42,7 @@ describe('test create product use case ', () => {
     input.name = ''
 
     await expect(customerCreateUseCase.execute(input)).rejects.toThrow(
-      'Nome é obrigatório'
+      'product: Nome é obrigatorio'
     )
   })
 

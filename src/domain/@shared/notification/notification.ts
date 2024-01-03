@@ -1,13 +1,13 @@
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
-export type NotificationError = {
+export type NotificationErrorProps = {
   message: string
   context: string
 }
 
 export class Notification {
-  private readonly errors: NotificationError[] = []
+  private readonly errors: NotificationErrorProps[] = []
 
-  addError (error: NotificationError): void {
+  addError (error: NotificationErrorProps): void {
     this.errors.push(error)
   }
 
@@ -20,5 +20,9 @@ export class Notification {
 
   hasErrors (): boolean {
     return this.errors.length > 0
+  }
+
+  getErros (): NotificationErrorProps[] {
+    return this.errors
   }
 }

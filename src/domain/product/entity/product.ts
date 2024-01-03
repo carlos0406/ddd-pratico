@@ -1,15 +1,20 @@
+import { AbstractClassEntity } from '../../@shared/entity/entity.abstract'
+import NotificationError from '../../@shared/notification/notification.error'
 import { type ProductInterface } from './product.interface'
 
-export default class Product implements ProductInterface {
-  _id: string = ''
-  _name: string = ''
-  _price: number = 0
+export default class Product extends AbstractClassEntity implements ProductInterface {
+  private _name: string = ''
+  private _price: number = 0
 
   constructor (_id: string, _name: string, _price: number) {
+    super()
     this._id = _id
     this._name = _name
     this._price = _price
     this.validate()
+    if (this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErros())
+    }
   }
 
   get name (): string {
@@ -35,15 +40,24 @@ export default class Product implements ProductInterface {
   }
 
   validate (): boolean {
-    if (this._id === '' || this._id.length === 0) {
-      throw new Error('Id é obrigatório')
+    if (this.name === undefined || this.name.length === 0) {
+      this.notification.addError({
+        context: 'product',
+        message: 'Nome é obrigatorio'
+      })
     }
-    if (this._name.length === 0) {
-      throw new Error('Nome é obrigatório')
+    if (this._id === undefined || this._id.length === 0) {
+      this.notification.addError({
+        context: 'product',
+        message: 'Id é obrigatório'
+      })
     }
 
     if (this._price <= 0) {
-      throw new Error('Preço é obrigatório')
+      this.notification.addError({
+        context: 'product',
+        message: 'Preço é obrigatório'
+      })
     }
 
     return true

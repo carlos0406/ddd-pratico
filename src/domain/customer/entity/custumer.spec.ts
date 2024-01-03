@@ -10,14 +10,21 @@ describe('Customer unit test', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const customer = new Customer('', 'robson')
-    }).toThrow('Id é obrigatório')
+    }).toThrow('custumer: Id é obrigatório')
   })
 
   it('shoud throw error whe name is empty', () => {
     expect(() => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const customer = new Customer('abc5', '')
-    }).toThrow('Nome é obrigatorio')
+    }).toThrow('custumer: Nome é obrigatorio')
+  })
+
+  it('shoud throw error whe name and id are empty', () => {
+    expect(() => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const customer = new Customer('', '')
+    }).toThrow('custumer: Nome é obrigatorio,custumer: Id é obrigatório')
   })
 
   it('shoud throw error whe name is empty on change name', () => {
