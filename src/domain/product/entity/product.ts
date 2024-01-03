@@ -1,5 +1,6 @@
 import { AbstractClassEntity } from '../../@shared/entity/entity.abstract'
 import NotificationError from '../../@shared/notification/notification.error'
+import ProductValidatorFactory from '../factory/product.validator.factory'
 import { type ProductInterface } from './product.interface'
 
 export default class Product extends AbstractClassEntity implements ProductInterface {
@@ -39,27 +40,7 @@ export default class Product extends AbstractClassEntity implements ProductInter
     this.validate()
   }
 
-  validate (): boolean {
-    if (this.name === undefined || this.name.length === 0) {
-      this.notification.addError({
-        context: 'product',
-        message: 'Nome é obrigatorio'
-      })
-    }
-    if (this._id === undefined || this._id.length === 0) {
-      this.notification.addError({
-        context: 'product',
-        message: 'Id é obrigatório'
-      })
-    }
-
-    if (this._price <= 0) {
-      this.notification.addError({
-        context: 'product',
-        message: 'Preço é obrigatório'
-      })
-    }
-
-    return true
+  validate (): void {
+    ProductValidatorFactory.create().validate(this)
   }
 }

@@ -7,6 +7,7 @@
 
 import { AbstractClassEntity } from '../../@shared/entity/entity.abstract'
 import NotificationError from '../../@shared/notification/notification.error'
+import CustumerValidatorFactory from '../factory/custumer.validator.factory'
 import { type Address } from '../value-object/address'
 
 export class Customer extends AbstractClassEntity {
@@ -48,18 +49,7 @@ export class Customer extends AbstractClassEntity {
   }
 
   validate (): void {
-    if (this.name === undefined || this.name.length === 0) {
-      this.notification.addError({
-        context: 'custumer',
-        message: 'Nome é obrigatorio'
-      })
-    }
-    if (this._id === undefined || this._id.length === 0) {
-      this.notification.addError({
-        context: 'custumer',
-        message: 'Id é obrigatório'
-      })
-    }
+    CustumerValidatorFactory.create().validate(this)
   }
 
   active (): void {
